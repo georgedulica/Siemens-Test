@@ -1,7 +1,7 @@
 import { questions } from './questions.js'
 
 let importedQuestions = [...questions];
-let questionsInitialLength = importedQuestions.length;
+let initialLength = importedQuestions.length;
 let answer;
 let currentQuestion;
 let score = 0;
@@ -31,7 +31,7 @@ function start()
 
 function getQuestion()
 {
-    if(index < questionsInitialLength && index > 0)
+    if(index < initialLength && index > 0)
     {
         answer = getRadioValue();
         if (answer === currentQuestion.correctAnswer)
@@ -53,7 +53,7 @@ function getQuestion()
         displayQuestion();
         ++index;
     }
-    else if(index === questionsInitialLength)
+    else if(index === initialLength)
     {
         answer = getRadioValue();
         if (answer === currentQuestion.correctAnswer)
@@ -85,13 +85,13 @@ function getRadioValue()
             return radioButtons[i].value;
         }
     } 
-    
+
     return null; 
 }
 
 function displayQuestion()
 {
-    question.innerHTML = `<p>${Math.abs(importedQuestions.length-questionsInitialLength)}. ${currentQuestion.question}</p>
+    question.innerHTML = `<p>${Math.abs(importedQuestions.length-initialLength)}. ${currentQuestion.question}</p>
         <div class="answers">
           <label>
             <input type="radio" name="radio" value="${currentQuestion.choices[0]}">
@@ -116,13 +116,13 @@ function doneQuiz()
 {
     questionsContainer.style.display = "none";     
     quizOverContainer.style.display = "flex";
-    displayScore.innerHTML = `<h3>You answered ${score} questions correctly`;
+    displayScore.innerHTML = `<h3>You have answered correctly to ${score} questions`;
 }
 
 function startAgain()
 {
     importedQuestions = [...questions];
-    questionsInitialLength = importedQuestions.length;
+    initialLength = importedQuestions.length;
     index = 0;
     score = 0;
     quizOverContainer.style.display = "none";

@@ -104,6 +104,10 @@ input[type='radio']:checked:after{
     cursor: pointer;
 }
 
+#next-question:hover{
+    opacity: 0.8
+}
+
 #quiz-over-container{
     display: none;
     justify-content: center;
