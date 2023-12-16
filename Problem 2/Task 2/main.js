@@ -70,7 +70,7 @@ function getNextQuestion()
             return;
         }
         
-        doneQuiz();
+        finishQuiz();
     }
 }
 
@@ -121,7 +121,7 @@ function displayQuestion()
 }
 
 // Display the number of correct answers
-function doneQuiz()
+function finishQuiz()
 {
     questionsContainer.style.display = "none";     
     quizOverContainer.style.display = "flex";
