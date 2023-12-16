@@ -20,7 +20,7 @@ const quizOverContainer = document.getElementById("quiz-over-container");
 
 // Add events
 playButton.addEventListener("click", start);
-buttonNext.addEventListener("click", getQuestion);
+buttonNext.addEventListener("click", getNextQuestion);
 playAgainButton.addEventListener("click", startAgain);
 
 // Start the quiz
@@ -28,12 +28,19 @@ function start()
 {
     play.style.display = "none";
     questionsContainer.style.display = "flex";
-    getQuestion();
-    displayQuestion();
+    getFirstQuestion();
 }
 
-// Get a new question, handle score and the number of questions
-function getQuestion()
+// Get the first question
+function getFirstQuestion()
+{
+    generateRandomQuestion();
+    displayQuestion();
+    ++index;
+}
+
+// Get the next question, handle score and the number of questions
+function getNextQuestion()
 {
     if(index < initialLength && index > 0)
     {
@@ -47,12 +54,6 @@ function getQuestion()
             return;
         }
 
-        generateRandomQuestion();
-        displayQuestion();
-        ++index;
-    }
-    else if(index === 0)
-    {
         generateRandomQuestion();
         displayQuestion();
         ++index;
@@ -136,5 +137,5 @@ function startAgain()
     score = 0;
     quizOverContainer.style.display = "none";
     questionsContainer.style.display = "flex";
-    getQuestion()
+    getFirstQuestion();
 }
