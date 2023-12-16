@@ -1,9 +1,11 @@
 import { questions } from './questions.js'
 
+let importedQuestions = [...questions];
+let questionsInitialLength = importedQuestions.length;
 let answer;
-let index = 0;
-let score = 0;
 let currentQuestion;
+let score = 0;
+let index = 0;
 
 const play = document.getElementById("play");
 const playButton = document.getElementsByClassName("play-button")[0];
@@ -16,20 +18,20 @@ const displayScore = document.getElementById("quiz-over");
 const quizOverContainer = document.getElementById("quiz-over-container");
 
 playButton.addEventListener("click", start);
-buttonNext.addEventListener("click",getQuestion);
+buttonNext.addEventListener("click", getQuestion);
 playAgainButton.addEventListener("click", startAgain);
 
 function start()
 {
     play.style.display = "none";
     questionsContainer.style.display = "flex";
-    shuffleQuestions();
-    getQuestion()
+    getQuestion();
+    displayQuestion();
 }
 
 function getQuestion()
 {
-    if(index < questions.length && index > 0)
+    if(index < questionsInitialLength && index > 0)
     {
         answer = getRadioValue();
         if (answer === currentQuestion.correctAnswer)
@@ -41,17 +43,17 @@ function getQuestion()
             return;
         }
 
-        currentQuestion = questions[index];
-        createQuestion(currentQuestion);
+        generateRandomQuestion();
+        displayQuestion();
         ++index;
     }
     else if(index === 0)
     {
-        currentQuestion = questions[index];
-        createQuestion(currentQuestion);
-        index++;
+        generateRandomQuestion();
+        displayQuestion();
+        ++index;
     }
-    else if(index == questions.length)
+    else if(index === questionsInitialLength)
     {
         answer = getRadioValue();
         if (answer === currentQuestion.correctAnswer)
@@ -67,14 +69,11 @@ function getQuestion()
     }
 }
 
-function shuffleQuestions()
+function generateRandomQuestion()
 {
-    let currentIndex = questions.length,  randomIndex;
-    while (currentIndex > 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [questions[currentIndex], questions[randomIndex]] = [questions[randomIndex], questions[currentIndex]];
-  }
+    let randomIndex = Math.floor(Math.random() * (importedQuestions.length - 1 - 0) + 0);
+    currentQuestion = importedQuestions[randomIndex];
+    importedQuestions.splice(randomIndex, 1);
 }
 
 function getRadioValue()
@@ -89,9 +88,9 @@ function getRadioValue()
     return null; 
 }
 
-function createQuestion(currentQuestion)
+function displayQuestion()
 {
-    question.innerHTML = `<p>${index+1}. ${currentQuestion.question}</p>
+    question.innerHTML = `<p>${Math.abs(importedQuestions.length-questionsInitialLength)}. ${currentQuestion.question}</p>
         <div class="answers">
           <label>
             <input type="radio" name="radio" value="${currentQuestion.choices[0]}">
@@ -121,10 +120,11 @@ function doneQuiz()
 
 function startAgain()
 {
+    importedQuestions = [...questions];
+    questionsInitialLength = importedQuestions.length;
     index = 0;
     score = 0;
     quizOverContainer.style.display = "none";
     questionsContainer.style.display = "flex";
-    shuffleQuestions();
     getQuestion()
 }
