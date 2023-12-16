@@ -1,5 +1,6 @@
 import { questions } from './questions.js'
 
+// Define variables
 let importedQuestions = [...questions];
 let initialLength = importedQuestions.length;
 let answer;
@@ -17,10 +18,12 @@ const radioButtons = document.getElementsByName("radio");
 const displayScore = document.getElementById("quiz-over");
 const quizOverContainer = document.getElementById("quiz-over-container");
 
+// Add events
 playButton.addEventListener("click", start);
 buttonNext.addEventListener("click", getQuestion);
 playAgainButton.addEventListener("click", startAgain);
 
+// Start the quiz
 function start()
 {
     play.style.display = "none";
@@ -29,6 +32,7 @@ function start()
     displayQuestion();
 }
 
+// Get a new question, handle score and the number of questions
 function getQuestion()
 {
     if(index < initialLength && index > 0)
@@ -69,6 +73,7 @@ function getQuestion()
     }
 }
 
+// Generate a random index to get a question and update the array of questions
 function generateRandomQuestion()
 {
     let randomIndex = Math.floor(Math.random() * (importedQuestions.length - 1 - 0) + 0);
@@ -76,6 +81,7 @@ function generateRandomQuestion()
     importedQuestions.splice(randomIndex, 1);
 }
 
+// Get the value select by the user
 function getRadioValue()
 {
     for (var i = 0; i < 4; i++) 
@@ -89,6 +95,7 @@ function getRadioValue()
     return null; 
 }
 
+// Display the question
 function displayQuestion()
 {
     question.innerHTML = `<p>${Math.abs(importedQuestions.length-initialLength)}. ${currentQuestion.question}</p>
@@ -112,6 +119,7 @@ function displayQuestion()
         </div>`;
 }
 
+// Display the number of correct answers
 function doneQuiz()
 {
     questionsContainer.style.display = "none";     
@@ -119,6 +127,7 @@ function doneQuiz()
     displayScore.innerHTML = `<h3>You have answered correctly to ${score} questions`;
 }
 
+// Restart the quiz
 function startAgain()
 {
     importedQuestions = [...questions];
