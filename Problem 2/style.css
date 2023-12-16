@@ -1,0 +1,131 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(202, 225, 0);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10em;
+}
+
+#play{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.play-button{
+    width: 10em;
+    padding: 0.5em 0.8em;
+    font-size: 1em;
+    font-weight: bold; 
+    background-color: rgb(120, 0, 225);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 0.5em;
+}
+
+.play-button:hover{
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#questions-container{
+    display: none;
+    width: 35em;
+    flex-direction: column;
+}
+
+#question {
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+#question:nth-child(odd){
+    margin-right: 5%;
+}
+
+#question p{
+    font-weight: bold;
+}
+
+.answers {
+    margin-top: 1em;
+}
+
+.answers label:not(:first-child){
+    border-top:0.01em solid #e0e0e0;
+}
+
+label{
+    padding: 1em;
+    display: block;
+}
+
+input[type="radio"]{
+    margin-right: 0.5em;
+}
+
+input[type='radio']:after{
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    background-color: #ffffff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: none;
+}
+
+input[type='radio']:checked:after{
+    position: relative;
+    background-color: rgb(202, 225, 0);
+    border: none;
+}
+
+#next-question{
+    margin: auto;
+    padding: 0.7em 0.7em;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 0.2em;
+    font-size: 0.4em,;
+    cursor: pointer;
+}
+
+#quiz-over-container{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+    gap: 2em;
+    border: solid #020202;
+}
+
+body{
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: linear-gradient(to bottom, #39a7a3, #66ff69);
+    height: 100vh;
+}
+
+*{
+    margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #questions-container {
+        width: 100%;
+    }
+}
