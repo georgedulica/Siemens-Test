@@ -39,7 +39,7 @@ function getFirstQuestion()
     ++index;
 }
 
-// Get the next question, handle score and the number of questions
+// Get the next question, handle score and the number of answered questions
 function getNextQuestion()
 {
     if(index < initialLength && index > 0)
