@@ -85,6 +85,7 @@ function getRadioValue()
             return radioButtons[i].value;
         }
     } 
+    
     return null; 
 }
 
